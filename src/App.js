@@ -5,7 +5,6 @@ import Login from './Pages/Login';
 import Game from './Components/Game';
 import Settings from './componentes/Settings';
 
-
 export default function App() {
   return (
     <Switch>
