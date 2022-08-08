@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import newUser from '../redux/actions';
 
@@ -11,7 +11,7 @@ class Login extends React.Component {
       email: '',
       nome: '',
       disabled: true,
-      // redirect: false,
+      redirect: false,
     };
   }
 
@@ -50,11 +50,18 @@ class Login extends React.Component {
     saveEmail(email);
   }
 
+  pageSettings = () => {
+    /* const { history } = this.props;
+    history.push('/configuracoes'); */
+    this.setState({ redirect: true });
+    // <Redirect to="/configuracoes" />
+  }
+
   render() {
-    const { email, nome, disabled } = this.state;
+    const { email, nome, disabled, redirect } = this.state;
     return (
       <div>
-        {/* {redirect ? <Redirect to="/carteira" /> : ''} */}
+        {redirect ? <Redirect to="/configuracoes" /> : ''}
         <h1>Login</h1>
         <div className="input-container">
           <div>
@@ -94,6 +101,15 @@ class Login extends React.Component {
           >
             Play
           </button>
+          <div>
+            <button
+              type="button"
+              data-testid="btn-settings"
+              onClick={ this.pageSettings }
+            >
+              Configurações
+            </button>
+          </div>
         </div>
       </div>
     );
