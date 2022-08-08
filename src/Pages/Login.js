@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { newUser, fetchFirstAPI } from '../redux/actions';
 
@@ -12,6 +13,7 @@ class Login extends React.Component {
       disabled: true,
       token: '',
       // redirect: false,
+      redirect: false,
     };
   }
 
@@ -48,11 +50,18 @@ class Login extends React.Component {
     history.push('/game');
   }
 
+  pageSettings = () => {
+    /* const { history } = this.props;
+    history.push('/configuracoes'); */
+    this.setState({ redirect: true });
+    // <Redirect to="/configuracoes" />
+  }
+
   render() {
-    const { email, nome, disabled, token } = this.state;
+    const { email, nome, disabled, redirect, token } = this.state;
     return (
       <div>
-        {/* {redirect ? <Redirect to="/carteira" /> : ''} */}
+        {redirect ? <Redirect to="/configuracoes" /> : ''}
         <h1>Login</h1>
         <div className="input-container">
           <div>
@@ -93,6 +102,15 @@ class Login extends React.Component {
           >
             Play
           </button>
+          <div>
+            <button
+              type="button"
+              data-testid="btn-settings"
+              onClick={ this.pageSettings }
+            >
+              Configurações
+            </button>
+          </div>
         </div>
       </div>
     );
