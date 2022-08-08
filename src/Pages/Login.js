@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import newUser from '../redux/actions';
+import { newUser, fetchFirstAPI } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -11,6 +10,7 @@ class Login extends React.Component {
       email: '',
       nome: '',
       disabled: true,
+      token: '',
       // redirect: false,
     };
   }
@@ -41,17 +41,15 @@ class Login extends React.Component {
     }));
   }
 
-  handleLogin = () => {
-    const { email } = this.state;
-    const { saveEmail } = this.props;
-    this.setState({
-      // redirect: true,
-    });
-    saveEmail(email);
+  handleLogin = async () => {
+    const { saveToken, history } = this.props;
+    const callingAPI = await saveToken();
+    localStorage.setItem('token', callingAPI.token);
+    history.push('/game');
   }
 
   render() {
-    const { email, nome, disabled } = this.state;
+    const { email, nome, disabled, token } = this.state;
     return (
       <div>
         {/* {redirect ? <Redirect to="/carteira" /> : ''} */}
@@ -88,6 +86,7 @@ class Login extends React.Component {
           </div>
           <button
             type="button"
+            token={ token }
             disabled={ disabled }
             onClick={ this.handleLogin }
             data-testid="btn-play"
@@ -101,7 +100,8 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  saveUser: (email, nome) => { dispatch(newUser(email, nome)); },
+  saveUser: (email, nome) => dispatch(newUser(email, nome)),
+  saveToken: () => dispatch(fetchFirstAPI()),
 });
 
 Login.propTypes = {
