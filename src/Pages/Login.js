@@ -23,14 +23,14 @@ class Login extends React.Component {
       return false;
     }
     return true;
-    // if (
-    //   !email.length
-    //   || !email.includes('@')
-    //   || !email.includes('.')
-    //   || email.indexOf('.') === email.length - 1
-    // ) {
-    //   return true;
-    // }
+    /* if (
+      !email.length
+      || !email.includes('@')
+      || !email.includes('.')
+      || email.indexOf('.') === email.length - 1
+    ) {
+      return true;
+    } */
   }
 
   handleChange = ({ target }) => {
@@ -44,6 +44,13 @@ class Login extends React.Component {
   }
 
   handleLogin = async () => {
+    const { saveUser } = this.props;
+    const { email, nome } = this.state;
+    saveUser(email, nome);
+    this.fecthAPI();
+  }
+
+  fecthAPI = async () => {
     const { saveToken, history } = this.props;
     const callingAPI = await saveToken();
     localStorage.setItem('token', callingAPI.token);
@@ -51,10 +58,7 @@ class Login extends React.Component {
   }
 
   pageSettings = () => {
-    /* const { history } = this.props;
-    history.push('/configuracoes'); */
     this.setState({ redirect: true });
-    // <Redirect to="/configuracoes" />
   }
 
   render() {

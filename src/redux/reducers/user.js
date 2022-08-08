@@ -10,8 +10,9 @@ const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case NEW_USER:
     return {
-      email: action.state.email,
-      nome: action.state.nome,
+      ...state,
+      email: action.email,
+      nome: action.nome,
     };
   case FIRST_RESPONSE_API:
     return {
