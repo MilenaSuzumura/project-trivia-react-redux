@@ -23,14 +23,14 @@ class Login extends React.Component {
       return false;
     }
     return true;
-    // if (
-    //   !email.length
-    //   || !email.includes('@')
-    //   || !email.includes('.')
-    //   || email.indexOf('.') === email.length - 1
-    // ) {
-    //   return true;
-    // }
+    /* if (
+      !email.length
+      || !email.includes('@')
+      || !email.includes('.')
+      || email.indexOf('.') === email.length - 1
+    ) {
+      return true;
+    } */
   }
 
   handleChange = ({ target }) => {
