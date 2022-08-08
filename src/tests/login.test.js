@@ -86,4 +86,16 @@ describe("Testa o botão", () => {
 
     expect(login).toBeInTheDocument();
   });
+
+  test("Testa se, ao clicar no botão configurações, exibe as configurações", async () => {
+    renderWithRouterAndRedux(<App />);
+
+    const config = screen.getByTestId("btn-settings");
+    const text = /Configurações/i
+
+    userEvent.click(config);
+    expect(screen.getByText(text)).toBeInTheDocument();
+  })
 });
+
+
