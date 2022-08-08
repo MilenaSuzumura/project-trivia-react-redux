@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import newUser from '../redux/actions';
+import { newUser, fetchFirstAPI } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -11,7 +11,9 @@ class Login extends React.Component {
       email: '',
       nome: '',
       disabled: true,
+      token: '',
       // redirect: false,
+      redirect: false,
     };
   }
 
@@ -21,14 +23,14 @@ class Login extends React.Component {
       return false;
     }
     return true;
-    // if (
-    //   !email.length
-    //   || !email.includes('@')
-    //   || !email.includes('.')
-    //   || email.indexOf('.') === email.length - 1
-    // ) {
-    //   return true;
-    // }
+    /* if (
+      !email.length
+      || !email.includes('@')
+      || !email.includes('.')
+      || email.indexOf('.') === email.length - 1
+    ) {
+      return true;
+    } */
   }
 
   handleChange = ({ target }) => {
@@ -40,20 +42,29 @@ class Login extends React.Component {
     })));
   }
 
-  handleLogin = () => {
-    const { email } = this.state;
+  handleLogin = async () => {
     const { saveUser } = this.props;
-    this.setState({
-      // redirect: true,
-    });
-    saveUser(email);
+    const { email, nome } = this.state;
+    saveUser(email, nome);
+    this.fecthAPI();
+  }
+
+  fecthAPI = async () => {
+    const { saveToken, history } = this.props;
+    const callingAPI = await saveToken();
+    localStorage.setItem('token', callingAPI.token);
+    history.push('/game');
+  }
+
+  pageSettings = () => {
+    this.setState({ redirect: true });
   }
 
   render() {
-    const { email, nome, disabled } = this.state;
+    const { email, nome, disabled, redirect, token } = this.state;
     return (
       <div>
-        {/* {redirect ? <Redirect to="/carteira" /> : ''} */}
+        {redirect ? <Redirect to="/configuracoes" /> : ''}
         <h1>Login</h1>
         <div className="input-container">
           <div>
@@ -87,12 +98,22 @@ class Login extends React.Component {
           </div>
           <button
             type="button"
+            token={ token }
             disabled={ disabled }
             onClick={ this.handleLogin }
             data-testid="btn-play"
           >
             Play
           </button>
+          <div>
+            <button
+              type="button"
+              data-testid="btn-settings"
+              onClick={ this.pageSettings }
+            >
+              Configurações
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -100,7 +121,8 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  saveUser: (email, nome) => { dispatch(newUser(email, nome)); },
+  saveUser: (email, nome) => dispatch(newUser(email, nome)),
+  saveToken: () => dispatch(fetchFirstAPI()),
 });
 
 Login.propTypes = {
