@@ -37,10 +37,9 @@ class Login extends React.Component {
     const { name, value } = target;
     this.setState({
       [name]: value,
-    });
-    this.setState(({
+    }, () => this.setState(({
       disabled: this.handleDisebled(),
-    }));
+    })));
   }
 
   handleLogin = async () => {
@@ -87,7 +86,7 @@ class Login extends React.Component {
               Nome:
               {' '}
               <input
-                type="name"
+                type="text"
                 id="input-player-name"
                 data-testid="input-player-name"
                 value={ nome }
