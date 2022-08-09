@@ -64,7 +64,6 @@ describe("Testa o botão", () => {
 
     // const button = await screen.findByTestId("btn-play");
 
-    // expect(button.disabled).toBe(false);
     expect(name).toHaveValue("Robson");
     expect(email).toHaveValue("robson@souorob.com.bson");
     expect(button.disabled).toBe(false);
