@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
+import Timer from '../Components/Timer';
+import Feedback from './Feedback';
 import { fetchSecondAPI } from '../redux/actions';
 import Questions from '../Components/Questions';
 
@@ -11,6 +13,8 @@ class Game extends React.Component {
     this.state = {
       questionsList: [],
       indexQuestion: 0,
+      showTimer: false,
+
     };
   }
 
@@ -32,8 +36,14 @@ class Game extends React.Component {
     });
   };
 
+  handleShowTimer = () => {
+    this.setState((prevState) => ({
+      showTimer: !prevState.showTimer,
+    }));
+  }
+
   render() {
-    const { questionsList, indexQuestion } = this.state;
+    const { showTimer, questionsList, indexQuestion } = this.state;
     const allAnswers = questionsList.length > 0
     && [...questionsList[indexQuestion].incorrect_answers,
       questionsList[indexQuestion].correct_answer].sort(
@@ -42,12 +52,21 @@ class Game extends React.Component {
     return (
       <div>
         <Header />
+        <Feedback />
         { questionsList.length > 0
         && <Questions
           questions={ questionsList }
           index={ indexQuestion }
           allAnswers={ allAnswers }
         />}
+        {showTimer && <Timer /> }
+
+        <button
+          type="button"
+          onClick={ this.handleShowTimer }
+        >
+          { showTimer ? 'Esconder Timer' : 'Mostrar Timer'}
+        </button>
       </div>
     );
   }
