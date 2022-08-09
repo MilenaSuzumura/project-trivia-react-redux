@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Login from './Pages/Login';
 import Settings from './Components/Settings';
 import Game from './Pages/Game';
+import Feedback from './Pages/Feedback';
 
 export default function App() {
   return (
@@ -12,6 +13,9 @@ export default function App() {
       <Route exact path="/game" component={ Game } />
       <Route path="/configuracoes">
         <Settings />
+      </Route>
+      <Route path="/feedback">
+        <Feedback />
       </Route>
     </Switch>
   );
