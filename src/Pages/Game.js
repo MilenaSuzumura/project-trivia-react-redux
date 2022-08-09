@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import Timer from '../Components/Timer';
-import Feedback from './Feedback';
 import { fetchSecondAPI } from '../redux/actions';
 import Questions from '../Components/Questions';
 
@@ -14,12 +13,14 @@ class Game extends React.Component {
       questionsList: [],
       indexQuestion: 0,
       showTimer: false,
-
+      disabled: true,
     };
   }
 
   componentDidMount() {
     this.handleFetchAPI();
+    this.handleShowTimer();
+    this.handleDisabled();
   }
 
   handleFetchAPI = async () => {
@@ -42,8 +43,14 @@ class Game extends React.Component {
     }));
   }
 
+  handleDisabled = () => {
+    this.setState((prevState) => ({
+      disabled: !prevState.disabled,
+    }));
+  }
+
   render() {
-    const { showTimer, questionsList, indexQuestion } = this.state;
+    const { showTimer, questionsList, indexQuestion, disabled } = this.state;
     const allAnswers = questionsList.length > 0
     && [...questionsList[indexQuestion].incorrect_answers,
       questionsList[indexQuestion].correct_answer].sort(
@@ -52,21 +59,15 @@ class Game extends React.Component {
     return (
       <div>
         <Header />
-        <Feedback />
         { questionsList.length > 0
         && <Questions
           questions={ questionsList }
           index={ indexQuestion }
           allAnswers={ allAnswers }
+          handleShowTimer={ this.handleShowTimer }
+          disabled={ disabled }
         />}
-        {showTimer && <Timer /> }
-
-        <button
-          type="button"
-          onClick={ this.handleShowTimer }
-        >
-          { showTimer ? 'Esconder Timer' : 'Mostrar Timer'}
-        </button>
+        {showTimer && <Timer disabled={ this.handleDisabled } /> }
       </div>
     );
   }

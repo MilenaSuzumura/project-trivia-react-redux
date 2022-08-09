@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class Questions extends Component {
   render() {
     console.log('Renderizei');
-    const { questions, index, allAnswers } = this.props;
+    const { questions, index, allAnswers, handleShowTimer, disabled } = this.props;
     const { question,
       category,
       correct_answer: correctAnswer } = questions[index];
@@ -21,7 +21,13 @@ export default class Questions extends Component {
             {allAnswers.map((answer, i) => {
               if (correctAnswer === answer) {
                 return (
-                  <button type="button" data-testid="correct-answer" key={ i }>
+                  <button
+                    type="button"
+                    data-testid="correct-answer"
+                    onClick={ handleShowTimer }
+                    disabled={ disabled }
+                    key={ i }
+                  >
                     {correctAnswer}
                   </button>);
               }
@@ -29,6 +35,8 @@ export default class Questions extends Component {
                 <button
                   type="button"
                   data-testid={ `wrong-answer-${i}` }
+                  onClick={ handleShowTimer }
+                  disabled={ disabled }
                   key={ i }
                 >
                   {answer}

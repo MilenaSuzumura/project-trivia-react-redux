@@ -1,12 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Timer extends React.Component {
   constructor() {
     super();
     this.state = {
-      seconds: 10,
-      phases: ['Pergunta 1', 'Pergunta 2', 'Pergunta 3'],
-      phaseIndex: 0,
+      seconds: 30,
     };
 
     this.one_second = 1000;
@@ -25,11 +24,11 @@ class Timer extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { disabled } = this.props;
     if (prevState.seconds === this.time_limit) {
-      this.setState({
-        seconds: 10,
-        phaseIndex: prevState.phaseIndex === 2 ? 0 : prevState.phaseIndex + 1,
-      });
+      this.setState(({
+        seconds: 30,
+      }), disabled);
     }
   }
 
@@ -40,13 +39,17 @@ class Timer extends React.Component {
 
   render() {
     console.log('render do timer');
-    const { seconds, phases, phaseIndex } = this.state;
+    const { seconds } = this.state;
     return (
       <section>
-        <h1>{phases[phaseIndex]}</h1>
         <h2>{seconds }</h2>
       </section>
     );
   }
 }
+
+Timer.propTypes = {
+  disabled: PropTypes.func,
+}.isRequired;
+
 export default Timer;
