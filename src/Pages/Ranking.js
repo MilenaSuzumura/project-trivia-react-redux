@@ -10,6 +10,7 @@ class Ranking extends Component {
   render() {
     return (
       <div>
+        <h1 data-testid="ranking-title">Raking</h1>
         <button
           type="button"
           data-testid="btn-go-home"
