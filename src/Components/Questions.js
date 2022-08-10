@@ -2,12 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Questions extends Component {
+  constructor() {
+    super();
+    this.state = {
+      buttonNext: false,
+    };
+  }
+
+  questionAnswers = () => {
+    this.setState({
+      buttonNext: true,
+    });
+  };
+
   render() {
-    console.log('Renderizei');
     const { questions, index, allAnswers, handleShowTimer, disabled } = this.props;
     const { question,
       category,
       correct_answer: correctAnswer } = questions[index];
+    const { buttonNext } = this.state;
     return (
       <div>
         <div>
@@ -24,7 +37,8 @@ export default class Questions extends Component {
                   <button
                     type="button"
                     data-testid="correct-answer"
-                    onClick={ handleShowTimer }
+                    onClick={ this.questionAnswers }
+                    value={ correctAnswer }
                     disabled={ disabled }
                     key={ i }
                   >
@@ -35,7 +49,8 @@ export default class Questions extends Component {
                 <button
                   type="button"
                   data-testid={ `wrong-answer-${i}` }
-                  onClick={ handleShowTimer }
+                  onClick={ this.questionAnswers }
+                  value={ answer }
                   disabled={ disabled }
                   key={ i }
                 >
@@ -43,6 +58,17 @@ export default class Questions extends Component {
                 </button>
               );
             })}
+            {
+              buttonNext && (
+                <button
+                  type="button"
+                  data-testid="btn-next"
+                  onClick={ handleShowTimer }
+                >
+                  Next
+                </button>
+              )
+            }
           </div>
         </div>
       </div>
