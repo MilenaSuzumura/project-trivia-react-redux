@@ -31,7 +31,6 @@ export default class Questions extends Component {
       category,
       correct_answer: correctAnswer } = questions[index];
     const { buttonNext } = this.state;
-    const { buttonNext } = this.state;
     return (
       <div>
         <div>
