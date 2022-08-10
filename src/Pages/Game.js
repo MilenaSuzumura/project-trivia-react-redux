@@ -51,6 +51,7 @@ class Game extends React.Component {
 
   render() {
     const { showTimer, questionsList, indexQuestion, disabled } = this.state;
+    const { history } = this.props;
     const allAnswers = questionsList.length > 0
     && [...questionsList[indexQuestion].incorrect_answers,
       questionsList[indexQuestion].correct_answer].sort(
@@ -66,6 +67,7 @@ class Game extends React.Component {
           allAnswers={ allAnswers }
           handleShowTimer={ this.handleShowTimer }
           disabled={ disabled }
+          history={ history }
         />}
         {showTimer && <Timer disabled={ this.handleDisabled } /> }
       </div>

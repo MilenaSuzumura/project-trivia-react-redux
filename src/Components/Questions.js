@@ -6,6 +6,7 @@ export default class Questions extends Component {
     super();
     this.state = {
       buttonNext: false,
+      questionQnt: 0,
     };
   }
 
@@ -15,8 +16,17 @@ export default class Questions extends Component {
     });
   };
 
+  avalia = () => {
+    const { questionQnt } = this.state;
+    const { handleShowTimer, history } = this.props;
+    const cinco = 5;
+    handleShowTimer();
+    if (questionQnt === cinco) history.push('/feedback');
+  };
+
   render() {
-    const { questions, index, allAnswers, handleShowTimer, disabled } = this.props;
+    const { questions, index, allAnswers, handleShowTimer,
+      disabled } = this.props;
     const { question,
       category,
       correct_answer: correctAnswer } = questions[index];
@@ -63,7 +73,13 @@ export default class Questions extends Component {
                 <button
                   type="button"
                   data-testid="btn-next"
-                  onClick={ handleShowTimer }
+                  onClick={ () => {
+                    handleShowTimer();
+                    this.setState((prevState) => ({
+                      questionQnt: prevState.questionQnt + 1,
+                      buttonNext: false,
+                    }), this.avalia);
+                  } }
                 >
                   Next
                 </button>
@@ -79,4 +95,5 @@ export default class Questions extends Component {
 Questions.propTypes = {
   questions: PropTypes.func,
   index: PropTypes.number,
+  history: PropTypes.objectOf(PropTypes.object),
 }.isRequired;
