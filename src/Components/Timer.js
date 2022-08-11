@@ -11,11 +11,11 @@ class Timer extends React.Component {
     this.one_second = 1000;
     this.time_limit = 0;
 
-    console.log('Constructor');
+    // console.log('Constructor');
   }
 
   componentDidMount() {
-    console.log('DidMount do Timer');
+    // console.log('DidMount do Timer');
     this.intervalID = setInterval(() => {
       this.setState((prevState) => ({
         seconds: prevState.seconds - 1,
@@ -34,11 +34,11 @@ class Timer extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.intervalID);
-    console.log('Desmontou');
+    // console.log('Desmontou');
   }
 
   render() {
-    console.log('render do timer');
+    // console.log('render do timer');
     const { seconds } = this.state;
     return (
       <section>
