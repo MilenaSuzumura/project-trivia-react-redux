@@ -11,6 +11,14 @@ export default class Questions extends Component {
     };
   }
 
+  // avalia = () => {
+  //   const { questionQnt } = this.state;
+  //   const { handleShowTimer, history } = this.props;
+  //   const cinco = 5;
+  //   handleShowTimer();
+  //   if (questionQnt === cinco) history.push('/feedback');
+  // };
+
     buttonOptions = () => {
       this.setState({
         isClicked: true,
@@ -50,4 +58,5 @@ export default class Questions extends Component {
 
 Questions.propTypes = {
   questions: PropTypes.func,
+  history: PropTypes.objectOf(PropTypes.object),
 }.isRequired;

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class Feedback extends React.Component {
   constructor() {
@@ -14,6 +14,11 @@ class Feedback extends React.Component {
 
   handlePlayAgain = () => {
     this.setState({ redirect: true });
+  }
+
+  handleClick = () => {
+    const { history } = this.props;
+    history.push('/ranking');
   }
 
   render() {
@@ -45,6 +50,14 @@ class Feedback extends React.Component {
           >
             Play Again
           </button>
+          <Link to="/ranking">
+            <button
+              type="button"
+              data-testid="btn-ranking"
+            >
+              Ranking
+            </button>
+          </Link>
         </div>
       </div>
     );
@@ -55,6 +68,9 @@ const mapStateToProps = (store) => ({
   email: store.user.email,
 });
 Feedback.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
   user: PropTypes.func,
   email: PropTypes.string.isRequired,
 }.isRequired;

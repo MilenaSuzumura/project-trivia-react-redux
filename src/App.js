@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './CSS/App.css';
 import { Route, Switch } from 'react-router-dom';
 import Login from './Pages/Login';
 import Settings from './Components/Settings';
@@ -15,10 +15,10 @@ export default function App() {
       <Route path="/configuracoes">
         <Settings />
       </Route>
-      <Route path="/feedback">
+      <Route path="/feedback" component={ Feedback }>
         <Feedback />
       </Route>
-      <Route path="/Ranking" component={ Ranking } />
+      <Route path="/ranking" component={ Ranking } />
     </Switch>
   );
 }

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { newUser, fetchFirstAPI } from '../redux/actions';
+import trivia from '../trivia.png';
+import '../CSS/Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -63,8 +65,11 @@ class Login extends React.Component {
   render() {
     const { email, nome, disabled, redirect, token } = this.state;
     return (
-      <div>
+      <div className="login-page">
         {redirect ? <Redirect to="/configuracoes" /> : ''}
+        <div className="logo-container">
+          <img src={ trivia } alt="logo" className="logo-image" />
+        </div>
         <h1>Login</h1>
         <div className="input-container">
           <div>

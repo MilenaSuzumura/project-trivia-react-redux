@@ -1,0 +1,41 @@
+body {
+  background-color: black;
+  color: aquamarine;
+}
+
+.login-page {
+  align-items: center;
+  display: block;
+  padding-top: 8%;
+  text-align: center;
+}
+
+.logo-image {
+  animation: go-back 1s infinite alternate;
+  height: 30vh;
+  width: 50vw;
+}
+
+@keyframes go-back {
+
+  from {
+    transform: translateX(100px);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.input-container label {
+  align-items: baseline;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 44%;
+}
+
+button {
+  margin-top: 6px;
+}
