@@ -1,56 +1,53 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Timer from './Timer';
+import '../styles/Questions.css';
 
 export default class Questions extends Component {
-  render() {
-    console.log('Renderizei');
-    const { questions, index, allAnswers, handleShowTimer, disabled } = this.props;
-    const { question,
-      category,
-      correct_answer: correctAnswer } = questions[index];
-    return (
-      <div>
+  constructor() {
+    super();
+    this.state = {
+      isClicked: false,
+    };
+  }
+
+    buttonOptions = () => {
+      this.setState({
+        isClicked: true,
+      });
+    }
+
+    render() {
+      const { questions, allAnswers } = this.props;
+      const { isClicked } = this.state;
+      return (
         <div>
+          <Timer />
           <h1 data-testid="question-category">
-            {category}
+            {questions.category}
           </h1>
           <h2 data-testid="question-text">
-            {question}
+            {questions.question}
           </h2>
           <div data-testid="answer-options">
-            {allAnswers.map((answer, i) => {
-              if (correctAnswer === answer) {
-                return (
-                  <button
-                    type="button"
-                    data-testid="correct-answer"
-                    onClick={ handleShowTimer }
-                    disabled={ disabled }
-                    key={ i }
-                  >
-                    {correctAnswer}
-                  </button>);
-              }
-              return (
-                <button
-                  type="button"
-                  data-testid={ `wrong-answer-${i}` }
-                  onClick={ handleShowTimer }
-                  disabled={ disabled }
-                  key={ i }
-                >
-                  {answer}
-                </button>
-              );
-            })}
+            {allAnswers.map((answer, i) => (
+              <button
+                type="button"
+                key={ i }
+                className={ isClicked ? answer.className : null }
+                data-testid={ answer.dataTest }
+                onClick={ this.buttonOptions }
+              >
+                {answer.element}
+
+              </button>))}
           </div>
+
         </div>
-      </div>
-    );
-  }
+      );
+    }
 }
 
 Questions.propTypes = {
   questions: PropTypes.func,
-  index: PropTypes.number,
 }.isRequired;
