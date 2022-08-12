@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { newUser, fetchFirstAPI } from '../redux/actions';
-import trivia from '../trivia.png';
+import { newPlayer, fetchFirstAPI } from '../redux/actions';
+// import trivia from '../trivia.png';
 import '../CSS/Login.css';
 
 class Login extends React.Component {
@@ -14,25 +14,16 @@ class Login extends React.Component {
       nome: '',
       disabled: true,
       token: '',
-      // redirect: false,
       redirect: false,
     };
   }
 
-  handleDisebled = () => {
+  handleDisabled = () => {
     const { email, nome } = this.state;
     if (nome.length > 1 && email.length > 1) {
       return false;
     }
     return true;
-    /* if (
-      !email.length
-      || !email.includes('@')
-      || !email.includes('.')
-      || email.indexOf('.') === email.length - 1
-    ) {
-      return true;
-    } */
   }
 
   handleChange = ({ target }) => {
@@ -40,7 +31,7 @@ class Login extends React.Component {
     this.setState({
       [name]: value,
     }, () => this.setState(({
-      disabled: this.handleDisebled(),
+      disabled: this.handleDisabled(),
     })));
   }
 
@@ -67,9 +58,9 @@ class Login extends React.Component {
     return (
       <div className="login-page">
         {redirect ? <Redirect to="/configuracoes" /> : ''}
-        <div className="logo-container">
+        {/* <div className="logo-container">
           <img src={ trivia } alt="logo" className="logo-image" />
-        </div>
+        </div> */}
         <h1>Login</h1>
         <div className="input-container">
           <div>
@@ -126,7 +117,7 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  saveUser: (email, nome) => dispatch(newUser(email, nome)),
+  saveUser: (gravatarEmail, name) => dispatch(newPlayer(gravatarEmail, name)),
   saveToken: () => dispatch(fetchFirstAPI()),
 });
 

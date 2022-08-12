@@ -9,10 +9,10 @@ class Game extends React.Component {
   constructor() {
     super();
     this.state = {
-      indexQuestion: 0,
       disabled: true,
       stateOption: [],
       stateQuestion: [],
+      indexQuestion: 0,
     };
   }
 
@@ -27,10 +27,26 @@ class Game extends React.Component {
     }));
   }
 
+  increaseIndex = () => {
+    const { indexQuestion } = this.state;
+    const { history } = this.props;
+    const quatro = 4;
+    if (indexQuestion < quatro) {
+      this.setState({
+        indexQuestion: indexQuestion + 1,
+      });
+    } else {
+      this.setState({
+        indexQuestion: 0,
+      });
+      history.push('/feedback');
+    }
+  }
+
   RandonAllAnswers = async () => {
-    const storage = localStorage.getItem('token');// capturando o token do local storage
+    const storage = localStorage.getItem('token');
     const { questionsGenerator, history } = this.props;
-    const API = await questionsGenerator(storage);// pegando a chamada da API que foi gerado
+    const API = await questionsGenerator(storage);
     const three = 3;
     if (API.response_code === three) {
       localStorage.removeItem('token');
@@ -61,7 +77,6 @@ class Game extends React.Component {
         category: element.category,
       });
       difficultyLevel.push(element.difficulty);
-      // console.log(optionArray);
       this.setState({
         stateOption: optionArray,
         stateQuestion: questionsArray,
@@ -85,8 +100,9 @@ class Game extends React.Component {
         <Header />
         <Questions
           questions={ stateQuestion[indexQuestion] }
-          difficultyLevel={ stateDifficulty }
+          difficultyLevel={ stateDifficulty[indexQuestion] }
           allAnswers={ stateOption[indexQuestion] }
+          increaseIndex={ this.increaseIndex }
         />
       </div>
     );
