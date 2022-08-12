@@ -16,17 +16,11 @@ class Feedback extends React.Component {
     this.setState({ redirect: true });
   }
 
-  handleClick = () => {
-    const { history } = this.props;
-    history.push('/ranking');
-  }
-
   render() {
-    const { nome, email } = this.props;
+    const { nome, email, score, assertions } = this.props;
     const { redirect } = this.state;
     const hash = md5(email).toString();
     const three = 3;
-    const acerto = 3;
     return (
       <div>
         <header>
@@ -36,12 +30,15 @@ class Feedback extends React.Component {
             alt={ nome }
           />
           <h2 data-testid="header-player-name">{ nome }</h2>
-          <h3 data-testid="header-score">0</h3>
+          <h3 data-testid="header-score">{ score }</h3>
         </header>
         <div>
-          <p data-testid="feedback-text">
-            {acerto < three ? 'Could be better...' : 'Well Done!' }
-          </p>
+          {
+            assertions < three ? (
+              <p data-testid="feedback-text">Could be better...</p>
+            )
+              : <p data-testid="feedback-text">Well Done!</p>
+          }
           {redirect ? <Redirect to="/" /> : ''}
           <button
             type="button"
@@ -58,15 +55,23 @@ class Feedback extends React.Component {
               Ranking
             </button>
           </Link>
+          <div>
+            <p data-testid="feedback-total-score">{score}</p>
+            <p data-testid="feedback-total-question">{assertions}</p>
+          </div>
         </div>
       </div>
     );
   }
 }
+
 const mapStateToProps = (store) => ({
-  nome: store.user.nome,
-  email: store.user.email,
+  nome: store.player.name,
+  email: store.player.gravatarEmail,
+  score: store.player.score,
+  assertions: store.player.assertions,
 });
+
 Feedback.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
@@ -74,4 +79,5 @@ Feedback.propTypes = {
   user: PropTypes.func,
   email: PropTypes.string.isRequired,
 }.isRequired;
+
 export default connect(mapStateToProps, null)(Feedback);

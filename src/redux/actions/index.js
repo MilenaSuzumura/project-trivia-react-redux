@@ -1,15 +1,27 @@
-export const NEW_USER = 'NEW_USER';
+export const NEW_PLAYER = 'NEW_PLAYER';
 export const FIRST_RESPONSE_API = 'FIRST_RESPONSE_API';
+export const SCORE_COUNT = 'SCORE_COUNT';
+export const ASSERTION_COUNT = 'ASSERTION_COUNT';
 
-export const newUser = (email, nome) => ({
-  type: NEW_USER,
-  email,
-  nome,
+export const newPlayer = (gravatarEmail, name) => ({
+  type: NEW_PLAYER,
+  gravatarEmail,
+  name,
 });
 
 export const receiveToken = (token) => ({
   type: FIRST_RESPONSE_API,
   token,
+});
+
+export const scoreCount = (score) => ({
+  type: SCORE_COUNT,
+  score,
+});
+
+export const assertionCount = (assertions) => ({
+  type: ASSERTION_COUNT,
+  assertions,
 });
 
 export const fetchFirstAPI = () => async (dispatch) => {
