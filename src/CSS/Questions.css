@@ -8,18 +8,18 @@
 
 .questions-container {
   align-items: center;
-  text-align: center;
+  font-size: larger;
   margin-left: 200px;
   margin-right: auto;
-  font-size: larger;
+  text-align: center;
 }
 
 button {
-  border-width: 1px;
-  color: #fff;
+  background: aquamarine;
   border-color: #18ab29;
+  border-width: 1px;
+  color: white;
   text-shadow: 1px 1px 0 #2f6627;
-  background:aquamarine;
 }
 
 button:hover {
