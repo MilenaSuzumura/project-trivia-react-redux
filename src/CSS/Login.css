@@ -1,3 +1,4 @@
+/* stylelint-disable property-no-vendor-prefix */
 body {
   background-color: black;
   color: aquamarine;
@@ -11,15 +12,17 @@ body {
 }
 
 .logo-image {
+
   /* animation: go-back 1s infinite alternate; */
   animation: myAnim 2s ease 0s infinite normal forwards;
   height: 30vh;
-  width: 50vw;
   margin-left: 80px;
   margin-right: auto;
+  width: 50vw;
 }
 
 @keyframes myAnim {
+
   0% {
     transform: scale3d(1, 1, 1);
   }
@@ -62,24 +65,23 @@ button {
   margin-left: auto;
   margin-right: auto;
   margin-top: 6px;
-  margin-left: 4px;
 }
 
 
 .buttonClass {
-  font-size: 15px;
-  font-weight: bold;
-  width: 120px;
-  height: 40px;
-  border-width: 1px;
-  color: #fff;
-  border-color: #18ab29;
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
+  background: aquamarine;
+  border-radius: 28px;
   border-bottom-left-radius: 28px;
   border-bottom-right-radius: 28px;
+  border-color: #18ab29;
+  border-top-left-radius: 28px;
+  border-width: 1px;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  height: 40px;
   text-shadow: 1px 1px 0 #2f6627;
-  background:aquamarine;
+  width: 120px;
 }
 
 .buttonClass:hover {
@@ -94,28 +96,28 @@ button {
 }
 
 .input {
-  display: inline-block;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  padding: 10px 20px;
+  background: rgba(252, 252, 252, 1);
   border: 1px solid #b7b7b7;
   -webkit-border-radius: 16px;
   border-radius: 16px;
-  font: normal 16px/normal Verdana, Geneva, sans-serif;
-  color: rgba(40,40,40,1);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  color: rgba(40, 40, 40, 1);
+  display: inline-block;
+  font: 400 16px/normal Verdana , Geneva , sans-serif;
+  padding: 10px 20px;
   -o-text-overflow: clip;
   text-overflow: clip;
-  background: rgba(252,252,252,1);
-  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.1) inset;
-  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.1) inset;
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.66);
+  -webkit-transform-origin: 0 0 0;
+  transform-origin: 0 0 0;
   -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-  -webkit-transform-origin: 0 0 0;
-  transform-origin: 0 0 0;
 }
 
 .button-container {

@@ -1,25 +1,25 @@
 .feedback-container {
   align-items: center;
-  text-align: center;
+  font-size: larger;
   margin-left: auto;
   margin-right: auto;
-  font-size: larger;
+  text-align: center;
 }
 
 .buttonClass {
-  font-size: 15px;
-  font-weight: bold;
-  width: 120px;
-  height: 40px;
-  border-width: 1px;
-  color: #fff;
-  border-color: #18ab29;
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
+  background: aquamarine;
+  border-radius: 28px;
   border-bottom-left-radius: 28px;
   border-bottom-right-radius: 28px;
+  border-color: #18ab29;
+  border-top-left-radius: 28px;
+  border-width: 1px;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  height: 40px;
   text-shadow: 1px 1px 0 #2f6627;
-  background:aquamarine;
+  width: 120px;
 }
 
 .buttonClass:hover {
