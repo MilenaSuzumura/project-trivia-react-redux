@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { newPlayer, fetchFirstAPI } from '../redux/actions';
-// import trivia from '../trivia.png';
+import trivia from '../trivia.png';
 import '../CSS/Login.css';
 
 class Login extends React.Component {
@@ -58,10 +58,9 @@ class Login extends React.Component {
     return (
       <div className="login-page">
         {redirect ? <Redirect to="/configuracoes" /> : ''}
-        {/* <div className="logo-container">
+        <div className="logo-container">
           <img src={ trivia } alt="logo" className="logo-image" />
-        </div> */}
-        <h1>Login</h1>
+        </div>
         <div className="input-container">
           <div>
             <label htmlFor="input-gravatar-email">
@@ -74,6 +73,7 @@ class Login extends React.Component {
                 value={ email }
                 name="email"
                 onChange={ this.handleChange }
+                className="input"
               />
             </label>
           </div>
@@ -89,27 +89,30 @@ class Login extends React.Component {
                 name="nome"
                 required
                 onChange={ this.handleChange }
+                className="input"
               />
             </label>
           </div>
+        </div>
+        <div className="button-container">
           <button
             type="button"
             token={ token }
             disabled={ disabled }
             onClick={ this.handleLogin }
             data-testid="btn-play"
+            className="buttonClass"
           >
             Play
           </button>
-          <div>
-            <button
-              type="button"
-              data-testid="btn-settings"
-              onClick={ this.pageSettings }
-            >
-              Configurações
-            </button>
-          </div>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ this.pageSettings }
+            className="buttonClass"
+          >
+            Configurações
+          </button>
         </div>
       </div>
     );

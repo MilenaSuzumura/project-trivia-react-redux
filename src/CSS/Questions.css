@@ -1,0 +1,28 @@
+.correctAnswer {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.incorrectAnswer {
+  border: 3px solid red;
+}
+
+.questions-container {
+  align-items: center;
+  text-align: center;
+  margin-left: 200px;
+  margin-right: auto;
+  font-size: larger;
+}
+
+button {
+  border-width: 1px;
+  color: #fff;
+  border-color: #18ab29;
+  text-shadow: 1px 1px 0 #2f6627;
+  background:aquamarine;
+}
+
+button:hover {
+  background: blue;
+  cursor: pointer;
+}

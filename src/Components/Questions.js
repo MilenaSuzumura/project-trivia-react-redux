@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { scoreCount, assertionCount } from '../redux/actions/index';
-import '../styles/Questions.css';
+import '../CSS/Questions.css';
 
 class Questions extends Component {
   constructor() {
@@ -84,7 +84,7 @@ class Questions extends Component {
       const { questions, allAnswers, increaseIndex } = this.props;
       const { isClicked, disabled, seconds } = this.state;
       return (
-        <div>
+        <div className="questions-container">
           { seconds }
           <h1 data-testid="question-category">
             {questions.category}

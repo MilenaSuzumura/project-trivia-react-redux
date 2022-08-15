@@ -1,0 +1,14 @@
+header{
+  margin-top: 3%;
+  justify-content: flex-end;
+  display: flex;
+  margin-right: 24px;
+}
+
+img {
+  padding: 8px;
+}
+
+.info-container {
+  display: block;
+}
