@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
+import '../CSS/Header.css';
+import '../CSS/Feedback.css';
 import { Redirect, Link } from 'react-router-dom';
 
 class Feedback extends React.Component {
@@ -22,28 +24,39 @@ class Feedback extends React.Component {
     const hash = md5(email).toString();
     const three = 3;
     return (
-      <div>
+      <main>
         <header>
+          <div className="info-container">
+            <h2 data-testid="header-player-name">{ nome }</h2>
+            <h3 data-testid="header-score">{ score }</h3>
+          </div>
           <img
             src={ `https://www.gravatar.com/avatar/${hash}` }
             data-testid="header-profile-picture"
             alt={ nome }
           />
-          <h2 data-testid="header-player-name">{ nome }</h2>
-          <h3 data-testid="header-score">{ score }</h3>
         </header>
-        <div>
+        <div className="feedback-container">
           {
             assertions < three ? (
-              <p data-testid="feedback-text">Could be better...</p>
+              <div>
+                <p data-testid="feedback-text">Could be better...</p>
+                <img src="https://memegenerator.net/img/instances/58442870/what-if-it-could-be-better.jpg" alt="Could be better..." className="feedback-img" />
+              </div>
             )
-              : <p data-testid="feedback-text">Well Done!</p>
+              : (
+                <div>
+                  <p data-testid="feedback-text">Well Done!</p>
+                  <img src="https://www.meme-arsenal.com/memes/671bc62c015e1226e82bffe284688099.jpg" alt="Well Done!" className="feedback-img" />
+                </div>
+              )
           }
           {redirect ? <Redirect to="/" /> : ''}
           <button
             type="button"
             data-testid="btn-play-again"
             onClick={ this.handlePlayAgain }
+            className="buttonClass"
           >
             Play Again
           </button>
@@ -51,16 +64,25 @@ class Feedback extends React.Component {
             <button
               type="button"
               data-testid="btn-ranking"
+              className="buttonClass"
             >
               Ranking
             </button>
           </Link>
-          <div>
-            <p data-testid="feedback-total-score">{score}</p>
-            <p data-testid="feedback-total-question">{assertions}</p>
+          <div className="final-info">
+            <p data-testid="feedback-total-score">
+              Pontuaçã:
+              {' '}
+              {score}
+            </p>
+            <p data-testid="feedback-total-question">
+              Acertos:
+              {' '}
+              {assertions}
+            </p>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 }
